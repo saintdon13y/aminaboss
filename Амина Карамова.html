@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Амина Карамова</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;600&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  --bg:#f3effb; --surface:#ffffff; --ink:#2a1740; --muted:#6b5a82; --accent:#7a3fd1; --pop:#ff5d8f; --line:#d9cdf0;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#1a1027;--surface:#261639;--ink:#f1e9ff;--muted:#b9a6d6;--accent:#b88bff;--pop:#ff7aa5;--line:#3d2a57}
+}
+:root[data-theme="dark"]{--bg:#1a1027;--surface:#261639;--ink:#f1e9ff;--muted:#b9a6d6;--accent:#b88bff;--pop:#ff7aa5;--line:#3d2a57}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,sans-serif;line-height:1.6;min-height:100vh}
+nav{display:flex;gap:8px;justify-content:center;padding:20px 16px 0}
+nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 18px;border-radius:999px;border:1.5px solid var(--line)}
+nav a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+nav a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+main{max-width:720px;margin:0 auto;padding:32px 20px 64px}
+.page{display:none}.page.on{display:block}
+h1,h2{font-family:"Unbounded",system-ui,sans-serif;line-height:1.15;margin:0}
+.hero{position:relative;padding:40px 0 24px}
+.hero svg{width:100%;height:auto;display:block;margin-bottom:8px}
+.hero .ribbon{stroke:var(--pop);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.hero .ribbon{animation:none;stroke-dashoffset:0}}
+h1{font-size:clamp(2.2rem,9vw,4rem);font-weight:700}
+.klass{display:inline-block;margin-top:20px;font-family:"Unbounded",system-ui,sans-serif;font-weight:500;font-size:1.1rem;background:var(--accent);color:#fff;padding:8px 20px;border-radius:999px}
+.lead{margin-top:24px;color:var(--muted);font-size:1.1rem;max-width:56ch}
+h2{font-size:clamp(1.5rem,6vw,2.2rem);margin-bottom:20px}
+h3{font-size:1.05rem;margin:32px 0 12px;color:var(--muted);font-weight:600}
+.subjects{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.subject{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:20px}
+.subject b{display:block;font-family:"Unbounded",system-ui,sans-serif;font-size:1.15rem;margin-bottom:4px}
+.subject span{color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:0;list-style:none}
+.tags li{background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:8px 18px;font-weight:600}
+.tags li:first-child{background:var(--pop);border-color:var(--pop);color:#fff}
+p.about{max-width:56ch;color:var(--muted)}
+</style>
+</head>
+<body>
+<nav aria-label="Страницы">
+  <a href="#about" id="n-about">Обо мне</a>
+  <a href="#ege" id="n-ege">ЕГЭ и интересы</a>
+</nav>
+<main>
+  <section class="page" id="p-about">
+    <div class="hero">
+      <svg viewBox="0 0 600 120" aria-hidden="true"><path class="ribbon" d="M5 90 C 80 10, 140 110, 220 55 S 340 5, 400 70 S 520 110, 595 30"/></svg>
+      <h1>Карамова Амина</h1>
+      <span class="klass">10 «Л» класс</span>
+      <p class="lead">Профессионально занимаюсь гимнастикой. Она помогает мне быть дисциплинированной и целеустремлённой.</p>
+    </div>
+  </section>
+
+  <section class="page" id="p-ege">
+    <h2>Предметы ЕГЭ</h2>
+    <div class="subjects">
+      <div class="subject"><b>Обществознание</b><span>планирую сдавать</span></div>
+      <div class="subject"><b>Английский язык</b><span>планирую сдавать</span></div>
+    </div>
+    <h3>Интересы</h3>
+    <ul class="tags">
+      <li>Гимнастика</li><li>Рисование</li><li>Путешествия</li><li>Шоппинг</li>
+    </ul>
+    <p class="about">Мне нравится узнавать новое, развиваться и пробовать себя в разных сферах.</p>
+  </section>
+</main>
+<script>
+(function(){
+  var views={about:1,ege:1};
+  function show(){
+    var h=(location.hash||"").replace("#","");
+    if(!views[h])h="about";
+    ["about","ege"].forEach(function(k){
+      document.getElementById("p-"+k).classList.toggle("on",k===h);
+      var a=document.getElementById("n-"+k);
+      if(k===h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+    });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",show);
+  show();
+})();
+</script>
+</body>
+</html>
